@@ -1,22 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lpalacio <lpalacio@student.42madrid>       +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/02 19:15:13 by lpalacio          #+#    #+#             */
-/*   Updated: 2023/09/09 21:27:43 by lpalacio         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "ft_printf.h"
 
 int	ft_printf(char const *fmt, ...)  //OJO añadir const
 {
 	va_list	args_i;
 	va_list	args_cp;
-
+	size_t	count;
+	
 	va_start(args_i,fmt);
 	va_copy(args_cp, args_i);
 	while (*fmt)
@@ -33,7 +22,7 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 			else if (*fmt == 's')
 			{
 				//write_string(args_i)
-				write (1, va_arg(args_i, char*), 3);
+				ft_putstr_fd(va_arg(args_i, char *), 1);
 			}
 			else if (*fmt == 'p')
 			{
@@ -59,7 +48,7 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 	}
 	va_end(args_i);	
 	va_end(args_cp);
-	return 0;
+	return count;
 }
 
 
@@ -70,11 +59,11 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 
 int main (void)
 {
+	size_t	len;
 	//char str[15]="prueba cadena";
 //	printf   ("original: %s", str);
 //	write (1, "\n",1);
-	ft_printf("algo %d o %s\n", 2, "b");
+	len = ft_printf("algo %d o %s\n", 2, "b");
+	printf("printed caracters count: %u", len);
 	return 0;
 }
-
-
