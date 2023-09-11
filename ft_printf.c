@@ -6,12 +6,16 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 	va_list	args_cp;
 	size_t	count;
 	
+	count = 0; //ya contare OJO!!
 	va_start(args_i,fmt);
 	va_copy(args_cp, args_i);
 	while (*fmt)
 	{
 		if (*fmt != '%')
+		{
 			write (1, fmt, 1);
+			count++;
+		}
 		else 
 		{	fmt++;
 			if(*fmt == 'c')
@@ -22,7 +26,8 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 			else if (*fmt == 's')
 			{
 				//write_string(args_i)
-				ft_putstr_fd(va_arg(args_i, char *), 1);
+				count = count + ft_putstr_fd(va_arg(args_i, char *), 1);
+				
 			}
 			else if (*fmt == 'p')
 			{
@@ -59,11 +64,14 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 
 int main (void)
 {
-	size_t	len;
+	size_t	lenr;
+	size_t lenft;
 	//char str[15]="prueba cadena";
 //	printf   ("original: %s", str);
 //	write (1, "\n",1);
-	len = ft_printf("algo %d o %s\n", 2, "b");
-	printf("printed caracters count: %u", len);
+	lenft = ft_printf("algo o %s\n", "burro");
+	lenr = printf ("algo o %s\n", "burro");
+	printf("int ft_pri: %d\n", lenft);
+	printf("int printf: %d\n", lenr);
 	return 0;
 }

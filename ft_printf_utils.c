@@ -10,7 +10,11 @@ size_t	ft_strlen(const char *s)
 	return (n);
 }
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_putstr_fd(char *s, int fd)
 {
-	write (fd, s, ft_strlen(s));
+	int count;
+	
+	count = ft_strlen(s);
+	write (fd, s, count);
+	return count;
 }

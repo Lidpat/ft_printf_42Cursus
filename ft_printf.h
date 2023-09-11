@@ -7,4 +7,4 @@
 int		ft_printf(char const *fmt, ...);
 
 size_t	ft_strlen(const char *s);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
