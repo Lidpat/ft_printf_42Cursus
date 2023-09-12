@@ -18,6 +18,16 @@ static unsigned int	mem_size(int const n)
 	return (count);
 }
 
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*buff;
+
+	buff = (unsigned char *)b;
+	while (len--)
+		buff[len] = c;
+	return (b);
+}
+
 void	ft_bzero(void *s, size_t n)
 {
 	ft_memset(s, 0, n);
