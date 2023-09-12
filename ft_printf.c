@@ -1,12 +1,12 @@
 #include "ft_printf.h"
 
-int	ft_printf(char const *fmt, ...)
+int	ft_printf(char const *fmt, ...)  //OJO añadir const
 {
 	va_list	args_i;
 	va_list	args_cp;
 	size_t	count;
 	
-	count = 0;
+	count = 0; //ya contare OJO!!
 	va_start(args_i,fmt);
 	va_copy(args_cp, args_i);
 	while (*fmt)
@@ -20,8 +20,8 @@ int	ft_printf(char const *fmt, ...)
 		{	fmt++;
 			if(*fmt == 'c')
 			{
-				//write_char(args_i)  STR= c +'\0' //No protege ifisprintable
-				count = count + ft_write_char(va_arg(args_i,int));
+				//write_char(args_i)  STR= c +'\0'
+				printf("%c",va_arg(args_i, char));
 			}
 			else if (*fmt == 's')
 			{
@@ -46,14 +46,14 @@ int	ft_printf(char const *fmt, ...)
 			else if (*fmt == '%')
 				write(1,"%",1);
 			else
-				return (-1); //error, sth not valid
+				return 1; //error, sth not valid
 		}
 		fmt++;
 //		c = va_arg(args_i, char *);
 	}
 	va_end(args_i);	
 	va_end(args_cp);
-	return (count);
+	return count;
 }
 
 
@@ -66,13 +66,12 @@ int main (void)
 {
 	size_t	lenr;
 	size_t lenft;
-	//char *str;
 	//char str[15]="prueba cadena";
-
-	lenr = printf ("printf: algo o %s\n", str);
-	lenft = ft_printf("ft_pri: algo o %s\n", str);
-
-	printf("int printf: %d\n", lenr);
+//	printf   ("original: %s", str);
+//	write (1, "\n",1);
+	lenft = ft_printf("algo o %s\n", "burro");
+	lenr = printf ("algo o %s\n", "burro");
 	printf("int ft_pri: %d\n", lenft);
+	printf("int printf: %d\n", lenr);
 	return 0;
 }
