@@ -12,13 +12,43 @@
 
 #include "ft_printf.h"
 
+int	check_conversion (char cs, va_list args)
+{
+	void *p;
+
+	if(cs == 'c')
+		return (ft_putchar_fd(va_arg(args, int), 1));
+	else if (cs == 's')
+		return (ft_putstr_fd(va_arg(args, char *), 1));
+	else if (cs == 'p')
+	{
+		p = va_arg(args, void *);
+		if (p == 0)
+			return(write(1, "(nil)", 5));
+		write (1, "0x", 2);
+		return (2 + ft_printnbr_base((long unsigned)p, "0123456789abcdef"));
+	}
+	else if (cs == 'd' || cs == 'i')
+		return (ft_putnbr_fd(va_arg(args, int), 1));
+	else if (cs == 'u')
+		return (ft_printnbr_base(va_arg(args, unsigned int), "0123456789"));
+	else if (cs == 'x')
+		return (ft_printnbr_base(va_arg(args, unsigned int), "0123456789abcdef"));
+	else if (cs == 'X')
+		return (ft_printnbr_base(va_arg(args, unsigned int), "0123456789ABCDEF"));
+	else if (cs == '%')
+		return (write(1,"%",1));
+	else
+		return (-1); //error, sth not valid
+}
+
 int	ft_printf(char const *fmt, ...)  //OJO añadir const
 {
 	va_list	args_i;
 	int	count;
 	
 	count = 0;
-	va_start(args_i,fmt);
+	va_start(args_i, fmt);
 	while (*fmt)
 	{
 		if (*fmt != '%')
@@ -26,7 +56,8 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 		else 
 		{	
 			fmt++;
-			if(*fmt == 'c')
+			count = count + check_conversion(*fmt, args_i);
+/* 			if(*fmt == 'c')
 				count = count + ft_putchar_fd(va_arg(args_i, int), 1);
 			else if (*fmt == 's')
 				count = count + ft_putstr_fd(va_arg(args_i, char *), 1);
@@ -34,7 +65,7 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 			{
 				//write_pointer(args_i) HEX (ft_putnbr_base)
 				count = count + write (1, "0x", 2);
-				count = count + ft_printnbr_base(va_arg(args_i, unsigned int), "0123456789abcdef");
+				count = count + ft_printnbr_base(va_arg(args_i, long unsigned int), "0123456789abcdef");
 			}
 			else if (*fmt == 'd' || *fmt == 'i')
 				count = count + ft_putnbr_fd(va_arg(args_i, int), 1);
@@ -47,7 +78,7 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 			else if (*fmt == '%')
 				count = count + write(1,"%",1);
 			else
-				return (-1); //error, sth not valid
+				return (-1); //error, sth not valid */
 		}
 		fmt++;
 	}
@@ -59,22 +90,24 @@ int	ft_printf(char const *fmt, ...)  //OJO añadir const
 
 /***********************/
 
-#include <stdio.h>
+/* #include <stdio.h>
 
-int main (void)
+	int main (void)
 {
 	int	lenr;
 	int	lenft;
 	//unsigned int num = 103;
-	int num = -183832;
-	void *p;
+	//int num = -183832;
+	//void *p;
 	//char str[20]="cadena de texto";
 	//char	*str;
-	p = &num;
+	//p = &num;
 
-	lenft = ft_printf("algo o %% and num: %u\t u otro tipo de num: %p\n", num, p);
-	lenr = 	  printf ("algo o %% and num: %u\t u otro tipo de num: %p\n", num, p);
+
+	lenft = ft_printf("algo o %% and num: %p\t u otro tipo de num: %p\n", 0, 0);
+	lenr = 	  printf ("algo o %% and num: %p\t u otro tipo de num: %p\n", 0, 0);
 	printf("int ft_pri: %d\n", lenft);
 	printf("int printf: %d\n", lenr);
 	return 0;
-}
+} */
+ 

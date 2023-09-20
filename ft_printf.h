@@ -25,4 +25,4 @@ int ft_putnbr_fd (int n, int fd);
 
 //int  ft_write_dec(int n);
 
-int	ft_printnbr_base(unsigned n, char *base);
+int	ft_printnbr_base(long unsigned n, char *base);

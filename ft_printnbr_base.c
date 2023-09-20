@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_printdigit(int n, char *base, int base_len)
+int	ft_printdigit(int n, char *base)
 {
 	int		count;
 	char	c;
@@ -27,11 +27,11 @@ int	ft_printdigit(int n, char *base, int base_len)
 	return (count + ft_putchar_fd(c, 1));
 }
 
-int	ft_printnbr_base(unsigned n, char *base)
+int	ft_printnbr_base(long unsigned n, char *base)
 {
 	int	num;
 	int count;
-	int base_len;
+	size_t base_len;
 
 	//param_control
 	if (base == NULL)
@@ -41,9 +41,9 @@ int	ft_printnbr_base(unsigned n, char *base)
 
 	num = 0;
 	base_len = ft_strlen(base);		
-	if (n < base_len && n >= 0)
-		count = ft_printdigit(n, base, base_len);
-	else if (n <= -base_len)
+	if (n < base_len)
+		count = ft_printdigit(n, base);
+	/* else if (n <= -base_len)
 	{
 		num = -(n % base_len);
 		n = n / base_len;
@@ -52,8 +52,8 @@ int	ft_printnbr_base(unsigned n, char *base)
 //		printf ("\tcount: %d\t", count);  // OJO!
 //		fflush(0);	//OJO!!!
 
-		ft_printdigit(num, base, base_len);
-	}
+		ft_printdigit(num, base);
+	} */
 	else if (n >= base_len)
 	{
 		num = n % base_len;
@@ -63,7 +63,7 @@ int	ft_printnbr_base(unsigned n, char *base)
 //		printf ("\tcount: %d\t", count); // OJO!!!
 //		fflush(0);  // OJO!!
 
-		ft_printdigit(num, base, base_len);
+		ft_printdigit(num, base);
 	}
 //	printf ("\tcount: %d\n", count);
 	return (count);
