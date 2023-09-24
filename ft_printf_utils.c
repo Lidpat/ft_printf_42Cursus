@@ -6,7 +6,7 @@
 /*   By: lpalacio <lpalacio@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:09:21 by lpalacio          #+#    #+#             */
-/*   Updated: 2023/09/24 19:31:03 by lpalacio         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:27:01 by lpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,6 @@ size_t	ft_strlen(const char *s)
 	while (s[n] != 0)
 		n ++;
 	return (n);
-}
-
-int	ft_putstr_fd(char *s, int fd)
-{
-	int count;
-
-	if (s == NULL)
-		s = "(null)";
-	count = ft_strlen(s);
-	write (fd, s, count);
-	return (count);
 }
 
 int	ft_putchar_fd(int c, int fd)
@@ -49,7 +38,7 @@ void	ft_putint_fd(int n, int fd)
 	}
 	c = '0' + n;
 	ft_putchar_fd(c, fd);
-	return;
+	return ;
 }
 
 void	ft_putnbr_fd(int n, int fd)
@@ -57,7 +46,6 @@ void	ft_putnbr_fd(int n, int fd)
 	int	num;
 
 	num = 0;
-		
 	if (n < 10 && n > -10)
 		ft_putint_fd(n, fd);
 	if (n <= -10)
@@ -74,7 +62,7 @@ void	ft_putnbr_fd(int n, int fd)
 		ft_putnbr_fd(n, fd);
 		ft_putint_fd(num, fd);
 	}
-	return;
+	return ;
 }
 
 int	count_printnbr(int n)
@@ -90,10 +78,4 @@ int	count_printnbr(int n)
 		count ++;
 	}
 	return (count);
-}
-
-int	ft_printnbr_fd(int n, int fd)
-{
-	ft_putnbr_fd(n, fd);
-	return (count_printnbr(n));
 }

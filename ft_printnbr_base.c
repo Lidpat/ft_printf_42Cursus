@@ -6,7 +6,7 @@
 /*   By: lpalacio <lpalacio@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 20:09:21 by lpalacio          #+#    #+#             */
-/*   Updated: 2023/09/24 18:40:46 by lpalacio         ###   ########.fr       */
+/*   Updated: 2023/09/24 20:28:17 by lpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	count_putnbr_base(long unsigned int n, size_t base_len)
 {
-	size_t count;
+	size_t	count;
 
 	count = 1;
 	while (n >= base_len)
@@ -39,12 +39,12 @@ void	ft_putnbr_base(long unsigned int n, char *base, size_t base_len)
 		ft_printnbr_base(n, base);
 		ft_putchar_fd(base[num], 1);
 	}
-	return;
+	return ;
 }
 
-int	ft_printnbr_base (long unsigned n, char *base)
+int	ft_printnbr_base(long unsigned n, char *base)
 {
-	size_t base_len;
+	size_t	base_len;
 
 	base_len = ft_strlen(base);
 	if (base == NULL)
@@ -52,4 +52,3 @@ int	ft_printnbr_base (long unsigned n, char *base)
 	ft_putnbr_base(n, base, base_len);
 	return (count_putnbr_base(n, base_len));
 }
-
