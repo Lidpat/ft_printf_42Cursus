@@ -6,7 +6,7 @@
 /*   By: lpalacio <lpalacio@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/02 19:15:13 by lpalacio          #+#    #+#             */
-/*   Updated: 2023/09/24 20:25:39 by lpalacio         ###   ########.fr       */
+/*   Updated: 2023/09/26 20:08:23 by lpalacio         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,17 @@ int	ft_printf(char const *fmt, ...)
 	while (*fmt)
 	{
 		if (*fmt != '%')
+		{
 			count = count + write (1, fmt, 1);
-		else
-		{	
 			fmt++;
-			count = count + check_conversion(*fmt, args_i);
 		}
-		fmt++;
+		else if (*++fmt)
+		{
+			count = count + check_conversion(*fmt, args_i);
+			fmt ++;
+		}
+		else
+			break ;
 	}
 	va_end(args_i);
 	return (count);
